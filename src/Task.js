@@ -27,7 +27,7 @@ function Task() {
     useEffect(() => {
         const local = localStorage.getItem('list');
         console.log('Page Refresh, fetch from local', JSON.parse(local));
-        if(JSON.parse(local) !== null){
+        if (JSON.parse(local) !== null) {
             setUserList(JSON.parse(local));
         }
 
@@ -56,71 +56,82 @@ function Task() {
         <hr />
         {
             list.length > 0 ?
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignContent: 'center',
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
-                }} >
-                    {list.map((e, index) => {
 
-                        return (
-                            <div style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                flexWrap: 'nowrap',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                margin: "5px 0px"
+                <>
 
-                            }} key={index}>
-                                <h3 style={{ margin: "0px 10px ", backgroundColor: e.status === true ? 'green' : 'red' }}>
-                                    {e.toDo}
-                                </h3>
-                                <button onClick={() => uddate(index)}> Update</button>
-                                <button onClick={() => remove(index)}> Delete</button> </div>
-                        )
-                    })}
-                </div>
+
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignContent: 'center',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                    }} >
+                        {list.map((e, index) => {
+
+                            return (
+                                <div style={{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    flexWrap: 'nowrap',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    margin: "5px 0px"
+
+                                }} key={index}>
+                                    <h3 style={{ margin: "0px 10px ", backgroundColor: e.status === true ? 'green' : 'red' }}>
+                                        {e.toDo}
+                                    </h3>
+                                    <button onClick={() => uddate(index)}> Update</button>
+                                    <button onClick={() => remove(index)}> Delete</button> </div>
+                            )
+                        })}
+                    </div>
+
+                    <div style={{
+
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-evenly',
+                        alignItems: 'flex-start'
+
+                    }}><div>
+                            <h2>
+                                Pending
+                            </h2>
+                            {
+                                list.map(ele => {
+                                    return (ele.status === false ? <div >  <h3 >
+                                        {ele.toDo}
+                                    </h3>  </div> : null)
+                                })
+                            }
+                        </div>
+                        <div>
+                            <h2>
+                                Completed
+                            </h2>
+                            {
+                                list.map(ele => {
+                                    return (ele.status === true ? <div >  <h3 >
+                                        {ele.toDo}
+                                    </h3>  </div> : null)
+                                })
+                            }
+
+                        </div>
+
+                    </div>
+                </>
+
+
+
                 :
                 null
         }
 
-        <div style={{
 
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-evenly',
-            alignItems: 'flex-start'
 
-        }}><div>
-        <h2>
-            Pending
-        </h2>
-        {
-            list.map(ele => {
-                return (ele.status === false ? <div >  <h3 >
-                    {ele.toDo}
-                </h3>  </div> : null)
-            })
-        }
-    </div>
-            <div>
-                <h2>
-                    Completed
-                </h2>
-                {
-                    list.map(ele => {
-                        return (ele.status === true ? <div >  <h3 >
-                            {ele.toDo}
-                        </h3>  </div> : null)
-                    })
-                }
-
-            </div>
-            
-        </div>
     </div>)
 }
 
